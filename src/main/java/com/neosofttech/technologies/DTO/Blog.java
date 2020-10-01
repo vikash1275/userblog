@@ -72,12 +72,7 @@ public class Blog {
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.user  = user;
     }
-    
-    
-    
-    
-
-    
+        
 }
