@@ -6,9 +6,11 @@
 package com.neosofttech.technologies.DTO;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -30,7 +32,8 @@ public class Blog {
     
     private String description;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;    
 
     public Blog(int id, String title, String description, User user) {

@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService  {
     
-    
         public User addUser(User user);
 	public Page<User> listAll(int pageNum);
         public Optional getById(int id);

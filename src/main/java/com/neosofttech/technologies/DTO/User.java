@@ -21,7 +21,7 @@ public class User {
     public User() {
     }
     
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     

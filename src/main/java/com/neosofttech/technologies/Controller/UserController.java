@@ -36,14 +36,13 @@ public class UserController {
     public List<User> viewPage(Model model,
     @PathVariable(name = "pageNum") int pageNum)
     {  
-        
+
     Page<User> page = userservice.listAll(pageNum);
     List<User> listProducts = page.getContent();
     int pagetotal=page.getTotalPages();
     return listProducts;
 
     }
-
     
     @PostMapping("/adduser")
     public ResponseEntity<Object> addUser(@RequestBody User user)
