@@ -5,7 +5,7 @@
  */
 package com.neosofttech.technologies.Controller;
 
-import com.neosofttech.technologies.DTO.Blog;
+import com.neosofttech.technologies.Domain.Blog;
 import com.neosofttech.technologies.Service.BlogService;
 import io.swagger.models.Model;
 import java.net.URI;
