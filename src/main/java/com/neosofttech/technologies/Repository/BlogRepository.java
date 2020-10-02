@@ -11,7 +11,7 @@ package com.neosofttech.technologies.Repository;
  */
 
 
-import com.neosofttech.technologies.DTO.Blog;
+import com.neosofttech.technologies.Domain.Blog;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

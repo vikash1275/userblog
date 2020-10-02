@@ -5,7 +5,7 @@
  */
 package com.neosofttech.technologies.Service;
 
-import com.neosofttech.technologies.DTO.Blog;
+import com.neosofttech.technologies.Domain.Blog;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;

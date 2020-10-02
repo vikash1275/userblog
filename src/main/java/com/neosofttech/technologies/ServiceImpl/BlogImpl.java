@@ -5,7 +5,7 @@
  */
 package com.neosofttech.technologies.ServiceImpl;
 
-import com.neosofttech.technologies.DTO.Blog;
+import com.neosofttech.technologies.Domain.Blog;
 import com.neosofttech.technologies.Repository.BlogRepository;
 import com.neosofttech.technologies.Service.BlogService;
 import java.util.Optional;

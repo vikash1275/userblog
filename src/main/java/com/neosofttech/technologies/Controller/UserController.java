@@ -5,7 +5,7 @@
  */
 package com.neosofttech.technologies.Controller;
 
-import com.neosofttech.technologies.DTO.User;
+import com.neosofttech.technologies.Domain.User;
 import com.neosofttech.technologies.Service.UserService;
 import io.swagger.models.Model;
 import java.net.URI;

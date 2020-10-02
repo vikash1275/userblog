@@ -5,7 +5,7 @@
  */
 package com.neosofttech.technologies.ServiceImpl;
 
-import com.neosofttech.technologies.DTO.User;
+import com.neosofttech.technologies.Domain.User;
 import com.neosofttech.technologies.Repository.UserRepository;
 import com.neosofttech.technologies.Service.UserService;
 import java.util.List;

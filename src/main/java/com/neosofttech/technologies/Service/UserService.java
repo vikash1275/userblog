@@ -5,7 +5,7 @@
  */
 package com.neosofttech.technologies.Service;
 
-import com.neosofttech.technologies.DTO.User;
+import com.neosofttech.technologies.Domain.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

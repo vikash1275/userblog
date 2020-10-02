@@ -5,7 +5,7 @@
  */
 package com.neosofttech.technologies.Repository;
 
-import com.neosofttech.technologies.DTO.User;
+import com.neosofttech.technologies.Domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
