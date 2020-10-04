@@ -25,6 +25,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  */
 
 @Configuration
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
@@ -49,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
             .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-            .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
-            .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
+            .antMatchers("/blog/addblog").hasAnyAuthority("ADMIN", "CREATOR")
+            .antMatchers("/blog/editblog/**").hasAnyAuthority("ADMIN", "EDITOR")
             .antMatchers("/delete/**").hasAuthority("ADMIN")
             .anyRequest().authenticated()
             .and()
