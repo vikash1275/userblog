@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 package com.neosofttech.technologies;
 
 import static org.graalvm.compiler.options.OptionType.User;
@@ -19,10 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
- /**
- *
- * @author backup
- */
+ 
 
 @Configuration
 @EnableWebSecurity
@@ -35,18 +34,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     .passwordEncoder(passwordEncoder())
     .withUser("user")
     .password(passwordEncoder().encode("vikash126"))
-    .roles("USER")
-          ;
-            
-               
+    .roles("ADMIN")
+          ;            
    }
+    
+    
 
    @Bean
    public PasswordEncoder passwordEncoder() {
        return new BCryptPasswordEncoder();
    } 
    
-    @Override
+   /* @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
             .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
@@ -60,16 +59,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logout().permitAll()
             .and()
             .exceptionHandling().accessDeniedPage("/403")
+             .csrf().disable();
             ;
     }
-    
-    /*
-    protected void configure(final HttpSecurity http) throws Exception {  
-        http.antMatcher("/**")  
-            .authorizeRequests()  
-            .antMatchers("/").permitAll()  
-            .anyRequest().authenticated()
-            .and().formLogin();  
-    }  
     */
+    
+  
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+         http.antMatcher("/**")  
+            .authorizeRequests()                  
+            .antMatchers("/").permitAll()
+            .anyRequest().authenticated()
+            .and().formLogin();
+            http.csrf().disable();
+    }
+    
 }
