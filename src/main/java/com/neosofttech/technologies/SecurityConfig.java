@@ -10,6 +10,7 @@ package com.neosofttech.technologies;
 import static org.graalvm.compiler.options.OptionType.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,18 +35,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     .passwordEncoder(passwordEncoder())
     .withUser("user")
     .password(passwordEncoder().encode("vikash126"))
-    .roles("ADMIN")
+    .roles("USER")
           ;            
    }
     
     
-
    @Bean
    public PasswordEncoder passwordEncoder() {
        return new BCryptPasswordEncoder();
-   } 
+   }
    
-   /* @Override
+      
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+         http.antMatcher("/**")  
+            .authorizeRequests()                  
+            .antMatchers("/").permitAll()
+            .antMatchers(HttpMethod.PUT, "/blog/editblog/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
+            .and().formLogin();
+            http.csrf().disable();
+    }
+   
+    /* @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
             .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
@@ -63,16 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             ;
     }
     */
-    
-  
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-         http.antMatcher("/**")  
-            .authorizeRequests()                  
-            .antMatchers("/").permitAll()
-            .anyRequest().authenticated()
-            .and().formLogin();
-            http.csrf().disable();
-    }
+   
     
 }
