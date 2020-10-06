@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 public interface UserService  {
     
         public User addUser(User user);
-	public Page<User> listAll(int pageNum);
+	public Page<User> listAll(int pageNum,int pagesize);
         public Optional getById(int id);
         public String deleteUserById(int id);
         public User update(int id, User user);

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public interface BlogService {
     
         public Blog addBlog(Blog blog);
-	public Page<Blog> listAll(int pageNum);
+	public Page<Blog> listAll(int pageNum,int pagesize);
         public Optional getById(int id);
         public String deleteBlogById(int id);
         public Blog update(int id, Blog blog);

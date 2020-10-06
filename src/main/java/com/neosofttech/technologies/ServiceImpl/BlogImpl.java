@@ -30,13 +30,12 @@ public class BlogImpl implements BlogService {
     @Override
     public Blog addBlog(Blog blog) {
              return  (Blog) blogrepo.save(blog);
-
     }
 
     @Override
-    public Page<Blog> listAll(int pageNum) {
-    int pageSize = 5;     
-    Pageable pageable = PageRequest.of(pageNum - 1, pageSize);     
+    public Page<Blog> listAll(int pageNum,int pagesize) {
+       
+    Pageable pageable = PageRequest.of(pageNum - 1, pagesize);     
     return blogrepo.findAll(pageable);
     }
 

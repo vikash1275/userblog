@@ -13,7 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,18 +35,19 @@ public class BlogController {
     @Autowired
     BlogService blogservice;
      
-    @RequestMapping("/page/{pageNum}")
+    @RequestMapping("/page/{pageNum}/{pagesize}")
     public List<Blog> viewPage(Model model,
-    @PathVariable(name = "pageNum") int pageNum)
+    @PathVariable(name = "pageNum") int pageNum,@PathVariable(name = "pagesize") int pagesize)
     {  
         
-    Page<Blog> page = blogservice.listAll(pageNum);
+    Page<Blog> page = blogservice.listAll(pageNum,pagesize);
     List<Blog> listProducts = page.getContent();
     int pagetotal=page.getTotalPages();
     return listProducts;
 
     }
-
+    
+   
     @PostMapping("/addblog")
     public ResponseEntity<Object> addUser(@RequestBody Blog blog)
     {	    	
@@ -58,8 +59,8 @@ public class BlogController {
         return ResponseEntity.created(path).build();
     }
     
-    @PreAuthorize("hasAuthority('Admin')")  
-    @PutMapping("/blog/{id}")
+   
+    @PutMapping("/editblog/{id}")
     public Blog updateBlog(@RequestBody Blog newblog, @PathVariable int id) {
            return blogservice.update(id, newblog);
     }

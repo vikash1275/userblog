@@ -32,9 +32,9 @@ public class UserImpl implements UserService{
     }
 
     
-    public Page<User> listAll(int pageNum) {
-    int pageSize = 5;     
-    Pageable pageable = PageRequest.of(pageNum - 1, pageSize);     
+    public Page<User> listAll(int pageNum,int pagesize) {
+      
+    Pageable pageable = PageRequest.of(pageNum - 1, pagesize);     
     return userrepo.findAll(pageable);
     }
 
@@ -53,7 +53,8 @@ public class UserImpl implements UserService{
 
     @Override
     public User update(int id, User user) {
-        return (User) userrepo.save(user);
+                      
+        return userrepo.save(user);
     }
     
 }

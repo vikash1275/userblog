@@ -32,12 +32,12 @@ public class UserController {
     @Autowired
     UserService userservice;
    
-    @RequestMapping("/page/{pageNum}")
+    @RequestMapping("/page/{pageNum}/{pagesize}")
     public List<User> viewPage(Model model,
-    @PathVariable(name = "pageNum") int pageNum)
+    @PathVariable(name = "pageNum") int pageNum,@PathVariable(name = "pagesize") int pagesize)
     {  
 
-    Page<User> page = userservice.listAll(pageNum);
+    Page<User> page = userservice.listAll(pageNum,pagesize);
     List<User> listProducts = page.getContent();
     int pagetotal=page.getTotalPages();
     return listProducts;
