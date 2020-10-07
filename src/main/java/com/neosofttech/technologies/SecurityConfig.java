@@ -7,7 +7,6 @@
 
 package com.neosofttech.technologies;
 
-import static org.graalvm.compiler.options.OptionType.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
