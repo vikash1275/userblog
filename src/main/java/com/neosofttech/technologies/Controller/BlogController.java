@@ -7,6 +7,8 @@ package com.neosofttech.technologies.Controller;
 
 import com.neosofttech.technologies.Domain.Blog;
 import com.neosofttech.technologies.Service.BlogService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import io.swagger.models.Model;
 import java.net.URI;
 import java.util.List;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
@@ -34,6 +37,19 @@ public class BlogController {
     
     @Autowired
     BlogService blogservice;
+    
+    private  RestTemplate restTemplate;
+    
+    /** Circuit breaker */
+    @HystrixCommand(fallbackMethod = "fallback")
+    public String readingList() {
+    URI uri = URI.create("http://localhost:8083/blog/page/1/1");
+    return this.restTemplate.getForObject(uri, String.class);
+    }
+
+  public String fallback() {
+  return "fallback";
+  }
      
     @RequestMapping("/page/{pageNum}/{pagesize}")
     public List<Blog> viewPage(Model model,
@@ -47,17 +63,29 @@ public class BlogController {
 
     }
     
-   
+    /** imlementing hystrix */
+    
+    @HystrixCommand(fallbackMethod = "blogAddedFail", commandProperties = {
+        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000")
+    })
     @PostMapping("/addblog")
-    public ResponseEntity<Object> addUser(@RequestBody Blog blog)
-    {	    	
+    public ResponseEntity<Object> addBlog(@RequestBody Blog blog) throws InterruptedException
+    {	 
+        
     	blogservice.addBlog(blog);
-        URI path= ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("(user)")
+         Thread.sleep(5000);
+         URI path= ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("(blog)")
                 .buildAndExpand(blog.getId())
                 .toUri();
         return ResponseEntity.created(path).build();
+             
+
     }
+    
+    private String blogAddedFail() {
+      return "Request fails. It takes long time to response";
+   }
     
    
     @PutMapping("/editblog/{id}")
