@@ -7,6 +7,8 @@ package com.neosofttech.technologies.Controller;
 
 import com.neosofttech.technologies.Service.KafKaProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +31,8 @@ public class KafkaProducerController {
         this.producerService = producerService;
     }
  
-    @PostMapping(value = "/publish")
-    public void sendMessageToKafkaTopic(@RequestParam("message") String message) 
+    @GetMapping(value = "/publish/{message}")
+    public void sendMessageToKafkaTopic(@PathVariable("message") String message) 
     {
         this.producerService.sendMessage(message);
     }
