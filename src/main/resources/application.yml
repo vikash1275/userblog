@@ -10,3 +10,12 @@ spring:
       bootstrap-servers: localhost:9092
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      
+ #Important points     
+ #need to install kafka and zookeeper in system
+ #Extract the download file using winzip
+ #create data directory inside kafka.inside it create two directory zookeeper and kafka 
+ #change the kafa/config/zookeeper.Properties file add the path of kafka directorty from data
+ #cahnge the kafa/config/server.properties file add the path of zookeeper directory from data
+ #Run the batch file of zookeeper-server-start.bat  using cmd
+ #Run the batch file of kafka-server-start.bat using cmd 
