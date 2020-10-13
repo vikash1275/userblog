@@ -11,6 +11,10 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       
+      user-blog:
+  ribbon:
+    listOfServers: http://localhost:8083
+      
  #Important points     
  #need to install kafka and zookeeper in system
  #Extract the download file using winzip

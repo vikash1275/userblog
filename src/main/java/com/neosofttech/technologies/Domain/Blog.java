@@ -21,7 +21,6 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
-
 public class Blog {
     
     public Blog() {

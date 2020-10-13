@@ -1,5 +1,7 @@
 package com.neosofttech.technologies;
 
+import com.neosofttech.technologies.Controller.ConsumerControllerClient;
+import java.io.IOException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,13 +9,18 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
+@EnableFeignClients
 @EnableCircuitBreaker
 @EnableSwagger2
 @EnableAutoConfiguration
@@ -21,8 +28,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class TechnologiesApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TechnologiesApplication.class, args);
+	public static void main(String[] args) throws RestClientException, IOException {
+		ApplicationContext ctx =SpringApplication.run(TechnologiesApplication.class, args);
+                ConsumerControllerClient consumerControllerClient = ctx.getBean(ConsumerControllerClient.class);
+		System.out.println(consumerControllerClient);
+		consumerControllerClient.getUser();
+	}
+        
+        /** implementing netflix feign client */
+        @Bean
+	public ConsumerControllerClient consumerControllerClient() {
+		return new ConsumerControllerClient();
 	}
         
         /** implementing docker */
