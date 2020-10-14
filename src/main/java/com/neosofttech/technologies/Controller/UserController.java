@@ -6,6 +6,7 @@
 package com.neosofttech.technologies.Controller;
 
 import com.neosofttech.technologies.Domain.User;
+import com.neosofttech.technologies.Repository.UserRepository;
 import com.neosofttech.technologies.Service.UserService;
 import io.swagger.models.Model;
 import java.net.URI;
@@ -31,6 +32,9 @@ public class UserController {
     
     @Autowired
     UserService userservice;
+    
+    @Autowired
+    UserRepository usrrepo;
    
     @RequestMapping("/page/{pageNum}/{pagesize}")
     public List<User> viewPage(Model model,
@@ -42,6 +46,14 @@ public class UserController {
     int pagetotal=page.getTotalPages();
     return listProducts;
 
+    }
+    
+    @RequestMapping("/findall")
+    public List<User> getUsers()
+    {  
+
+    return (List<User>) usrrepo.findAll();
+    
     }
     
     @PostMapping("/adduser")
