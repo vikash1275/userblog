@@ -26,7 +26,7 @@ public class ConsumerControllerClient {
     public void getUser() throws RestClientException, IOException {
 
 		try {
-			User usr = loadBalancer.getData(1, 1);
+			User usr = (User) loadBalancer.getAllUsers();                        
 			System.out.println(usr.getId());
 		} catch (Exception ex) {
 			System.out.println(ex);
