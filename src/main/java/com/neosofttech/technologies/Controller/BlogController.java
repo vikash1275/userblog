@@ -38,6 +38,9 @@ public class BlogController {
     @Autowired
     BlogService blogservice;
     
+//    @Autowired
+//    KafkaTemplate<String,String> kafkaTemplate;
+//    
     private  RestTemplate restTemplate;
     
     /** Circuit breaker */

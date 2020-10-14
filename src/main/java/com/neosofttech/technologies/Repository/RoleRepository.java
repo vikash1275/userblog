@@ -6,12 +6,13 @@
 package com.neosofttech.technologies.Repository;
 
 import com.neosofttech.technologies.Domain.Role;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  *
  * @author backup
  */
-public interface RoleRepository extends PagingAndSortingRepository<Role, Integer>{
+public interface RoleRepository extends CrudRepository<Role, Integer>{
     
 }
