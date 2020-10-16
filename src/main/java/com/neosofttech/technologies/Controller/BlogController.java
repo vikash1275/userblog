@@ -38,9 +38,10 @@ public class BlogController {
     @Autowired
     BlogService blogservice;
     
-//    @Autowired
-//    KafkaTemplate<String,String> kafkaTemplate;
-//    
+    //    @Autowired
+    //    KafkaTemplate<String,String> kafkaTemplate;
+    //    
+    
     private  RestTemplate restTemplate;
     
     /** Circuit breaker */
@@ -50,9 +51,9 @@ public class BlogController {
     return this.restTemplate.getForObject(uri, String.class);
     }
 
-  public String fallback() {
-  return "fallback";
-  }
+    public String fallback() {
+    return "fallback";
+    }
      
     @RequestMapping("/page/{pageNum}/{pagesize}")
     public List<Blog> viewPage(Model model,

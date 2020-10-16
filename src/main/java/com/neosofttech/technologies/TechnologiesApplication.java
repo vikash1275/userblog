@@ -1,6 +1,7 @@
 package com.neosofttech.technologies;
 
 import com.neosofttech.technologies.Controller.ConsumerControllerClient;
+import com.neosofttech.technologies.ServiceImpl.Receiver;
 import java.io.IOException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -18,6 +19,15 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.Queue;
 
 
 @EnableFeignClients
@@ -27,13 +37,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaServer
 @SpringBootApplication
 public class TechnologiesApplication {
-
-	public static void main(String[] args) throws RestClientException, IOException {
+    
+	public static void main(String[] args)  {
 		ApplicationContext ctx =SpringApplication.run(TechnologiesApplication.class, args);
-                ConsumerControllerClient consumerControllerClient = ctx.getBean(ConsumerControllerClient.class);
+               
+              /*  ConsumerControllerClient consumerControllerClient = ctx.getBean(ConsumerControllerClient.class);
 		System.out.println(consumerControllerClient);
 		consumerControllerClient.getUser();
-	}
+	      */
+                }
         
         /** implementing netflix feign client */
         @Bean

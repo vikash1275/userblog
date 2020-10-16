@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @FeignClient(name = "user-blog", url = "http://localhost:8083")
-@Headers("Content-Type: application/json")
 public interface RemoteCallService {
-    @RequestMapping(value = "/user/findall", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/findall", method = RequestMethod.GET ,produces = MediaType.APPLICATION_JSON_VALUE)
  public List <User> getAllUsers();    
 }

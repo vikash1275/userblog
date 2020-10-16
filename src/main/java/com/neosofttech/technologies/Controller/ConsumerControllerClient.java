@@ -9,11 +9,15 @@ package com.neosofttech.technologies.Controller;
 import com.neosofttech.technologies.Domain.User;
 import com.neosofttech.technologies.Service.RemoteCallService;
 import feign.Feign;
+import feign.auth.BasicAuthRequestInterceptor;
 import java.io.File;
 import java.io.IOException;
+import static org.bouncycastle.cms.RecipientId.password;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestClientException;
+
         
 
 /**
@@ -26,14 +30,15 @@ public class ConsumerControllerClient {
     
     @Autowired
     private RemoteCallService loadBalancer;
-    
-    /*
+     
+     /*
      RemoteCallService callService = Feign.builder()
         .encoder(new JacksonEncoder())
-        .decoder(new JacksonDecoder())
-        .requestInterceptor(new FeignConfig(props).getJwtRequestInterceptor())
-        .target(RemoteCallService.class, "http://localhost:8083");
-   */
+        .decoder(new JacksonDecoder()) 
+        .contract(new SpringMvcContract())     
+        .requestInterceptor(new BasicAuthRequestInterceptor("user2", ""))
+        .target(RemoteCallService.class,"http://localhost:8083");
+     */
     
     public void getUser() throws RestClientException, IOException {
 
