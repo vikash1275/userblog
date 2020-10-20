@@ -6,6 +6,7 @@
 package com.neosofttech.technologies.Domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,6 +47,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
             )
     private Set<Role> roles = new HashSet<>();
+
+    public User(String username, String password, List<Object> emptyList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
    
 
