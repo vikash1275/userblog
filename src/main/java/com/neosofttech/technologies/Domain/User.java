@@ -48,10 +48,7 @@ public class User {
             )
     private Set<Role> roles = new HashSet<>();
 
-    public User(String username, String password, List<Object> emptyList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+   
    
 
     public Set<Role> getRoles() {
