@@ -5,7 +5,9 @@
  */
 package com.neosofttech.technologies.Controller;
 
+import com.neosofttech.technologies.Domain.ApplicationUser;
 import com.neosofttech.technologies.Domain.User;
+import com.neosofttech.technologies.Repository.ApplicationUserRepository;
 import com.neosofttech.technologies.Repository.UserRepository;
 import com.neosofttech.technologies.Service.UserService;
 import io.swagger.models.Model;
@@ -14,6 +16,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +33,24 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/user")
 public class UserController {
     
+    /**  Spring Authentication Part */
+    
+    private ApplicationUserRepository applicationUserRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserController(ApplicationUserRepository applicationUserRepository,
+                          BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.applicationUserRepository = applicationUserRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+    @PostMapping("/sign-up")
+    public void signUp(@RequestBody ApplicationUser user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        applicationUserRepository.save(user);
+    }
+    
+    /** User Controller Service  */
     @Autowired
     UserService userservice;
     

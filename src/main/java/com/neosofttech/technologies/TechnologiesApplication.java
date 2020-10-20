@@ -28,6 +28,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.Queue;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @EnableFeignClients
@@ -65,5 +67,12 @@ public class TechnologiesApplication {
         public RestTemplate rest(RestTemplateBuilder builder) {
         return builder.build();
         }
-
+        
+        /**  spring security using password encryptor  */
+        @Bean
+        public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+        }
+        
+        
 }
